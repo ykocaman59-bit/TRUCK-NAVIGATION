@@ -27,6 +27,13 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Generate Android Folder if Missing
+        run: |
+          if [ ! -d "android" ]; then
+            npx react-native eject || npx @react-native-community/cli init temp_project --skip-install
+            # Eğer proje yapısı kütüphane ise örnek bir uygulama dizini oluşturulması gerekebilir
+          fi
+
       - name: Build Android APK
         run: |
           cd android
